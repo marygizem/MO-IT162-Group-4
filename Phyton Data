@@ -1,1 +1,54 @@
+import pandas as pd
 
+demo.to_csv("customer_demographics_clean.csv", index=False)
+trans.to_csv("customer_transactions_clean.csv", index=False)
+social.to_csv("social_media_interactions_clean.csv", index=False)
+
+social = social.drop_duplicates()
+social = social.fillna(0)
+display(social.head())
+
+	CustomerID	InteractionID	InteractionDate	Platform	InteractionType	Sentiment
+0	2dcb9523-356b-40b2-a67b-1f27797de261	e5d15761-d0a7-4329-89e3-79a892c56097	2023-07-11	0	Comment	0
+1	e12c37b3-7d4d-472f-9fd8-0df2cb3001aa	02f9f376-70ae-4fcd-9070-1db977939948	2023-07-06	Twitter	Share	0
+2	08a911a3-65e6-4f5d-a6a1-ae7ddcbe28a2	a83fa04c-f109-4f24-8ce1-2078154f6a1c	2024-05-24	Instagram	Comment	Neutral
+3	efdfdfc9-5dbb-4478-911a-101a390a0285	28a69c4b-a2e4-4c74-a130-1132d7733fdf	2023-11-01	Instagram	Like	Neutral
+4	ca1e90f6-0e5f-492e-ab92-252ff540da18	d9d1c6f8-5e15-4738-b52b-13c2982420cc	2023-07-08	Instagram	Like	
+
+
+trans = trans.drop_duplicates()
+trans = trans.fillna(0)
+display(trans.head())
+
+CustomerID	TransactionID	TransactionDate	Amount	ProductCategory	PaymentMethod
+0	60567026-f719-4cd6-849e-137e86d8938f	5ff75116-0a50-4d04-80fb-31e5ccbb0769	2024-05-15	117.64	Clothing	PayPal
+1	4090ba85-b111-4f75-a792-c777965f5255	2c39b9fe-ff57-4d39-9321-9f5cdf187aa1	2023-04-26	466.14	Health & Beauty	Bank Transfer
+2	9223891b-73ff-4d5c-b8ae-13ece82ee28b	f79588dd-3db9-4ffa-97f8-7de0e64259f1	2022-09-23	563.99	Clothing	Debit Card
+3	9243eebc-938f-480c-8564-16d503d250de	401c0fc9-60df-4455-ad78-67c132f9897d	2024-04-15	254.44	Automotive	PayPal
+4	6e3e8eb8-bc0f-4ffe-9f74-5d5efec9502f	2034aebc-8280-4254-a667-92bcd1c2be4f	2024-06-03	590.52	Home & Garden	Bank Transfer
+
+
+demo = demo.drop_duplicates()
+demo = demo.fillna("Unknown")
+display(demo.head())
+
+CustomerID	Age	Gender	Location	IncomeLevel	SignupDate
+0	9207fa75-5758-48d1-94ad-19c041e0520f	51.0	Female	Jensenberg	Low	2022-11-17
+1	5fb09cd8-a473-46f7-80bd-6e49cf509078	Unknown	Female	Castilloport	High	2020-07-21
+2	c139496e-cc89-498a-bd90-1fb4627b6cff	37.0	Male	Lake Jennifertown	Unknown	2021-01-01
+3	50118139-7264-428f-81cc-a25fddc5d6dd	44.0	Male	Port Carl	Medium	2024-06-10
+4	7d1f2bbc-8d16-4fbc-9b37-ece3324e8ed4	50.0	Female	Jessebury	High	2023-08-24
+
+demo = pd.read_csv("customer_demographics_contaminated.csv")
+trans = pd.read_csv("customer_transactions_contaminated.csv")
+social = pd.read_csv("social_media_interactions_contaminated.csv")
+
+display(demo.head())
+
+
+CustomerID	Age	Gender	Location	IncomeLevel	SignupDate
+0	9207fa75-5758-48d1-94ad-19c041e0520f	51.0	Female	Jensenberg	Low	2022-11-17
+1	5fb09cd8-a473-46f7-80bd-6e49cf509078	NaN	Female	Castilloport	High	2020-07-21
+2	c139496e-cc89-498a-bd90-1fb4627b6cff	37.0	Male	Lake Jennifertown	NaN	2021-01-01
+3	50118139-7264-428f-81cc-a25fddc5d6dd	44.0	Male	Port Carl	Medium	2024-06-10
+4	7d1f2bbc-8d16-4fbc-9b37-ece3324e8ed4	50.0	Female	Jessebury	High	2023-08-24
